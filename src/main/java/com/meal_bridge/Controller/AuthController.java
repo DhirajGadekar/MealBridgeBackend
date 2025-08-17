@@ -66,7 +66,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/token/refresh")
+    @PostMapping(ControllerConstant.REFRESH_TOKEN)
     public ResponseEntity<AuthResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest request) {
         log.info("Token refresh attempt");
 
@@ -85,7 +85,7 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
-    @PutMapping("/roles")
+    @PutMapping(ControllerConstant.UPDATE_ROLE)
     @PreAuthorize("hasRole('ADMIN') ")
     public ResponseEntity<String> updateUserRoles(
             @RequestParam String email,
@@ -104,7 +104,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/unlock")
+    @PostMapping(ControllerConstant.DISABLE)
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> unlockAccount(@RequestParam String email) {
         log.info("Account unlock request for user: {}", email);
@@ -118,7 +118,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/disable")
+    @PostMapping(ControllerConstant.DISABLE)
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> disableAccount(@RequestParam String email) {
         log.info("Account disable request for user: {}", email);
